@@ -7,7 +7,7 @@
      return data;   
   }
 //   export let getMoviesById = async(searchTerm)=> {
-//     let apikey="1c46f0cb";
+//     let apikey="Need valid apike";
 //     let url=(`https://www.omdbapi.com/?apikey=${apikey}&i=${Id}`);
 //     let response = await fetch(url);
 //     let data=await response.json();
