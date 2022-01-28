@@ -1,6 +1,6 @@
  ///SEARCH BY SEARCH TERM///
  export let getMoviesBySearchTerm = async(searchTerm)=> {
-    let apikey="1c46f0cb";
+    let apikey="Need valid apikey";
     let url=(`https://www.omdbapi.com/?apikey=${apikey}&s=${searchTerm}`);
     let response = await fetch(url);
     let data=await response.json();
