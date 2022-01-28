@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import { getMoviesBySearchTerm } from "./utils";
+import SearchBar from "./SearchBar";
+ //import MovieDetails from "./MovieDetails";
+ //import MoviesCard from "./MoviesCard";
+import MoviesList from "./MovieList"
 
+//const searchTerm = "Batman"
 function App() {
+  const [searchTerm, setsearchTerm] = useState("Batman");
+  const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  
+
+  useEffect(() => {
+    setIsLoading(true);
+    let _movies = getMoviesBySearchTerm(searchTerm)
+      .then((data) => {
+        // setmovie(data.Search); //for movie details
+        setMovies(data.Search);
+        //seterror(null);
+        setIsLoading(false);
+        return data;
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+    console.log(_movies);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {!isLoading?(
+           console.log(movies), 
+          <div className="container">
+           <SearchBar Movie={movies}/>
+            <MoviesList Movie={movies} />
+            {/* <MovieDetails movie={movies} />
+            <MoviesCard movie={movies} /> */}
+            {/* <SearchBar Movie={movies}/> */}
+          </div>
+        ) : (
+          <p>Loading... </p>
+        )
+      }
+    </>
   );
 }
-
 export default App;
+
+
